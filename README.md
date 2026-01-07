@@ -37,32 +37,32 @@ This project demonstrates a complete CRUD application with authentication, clean
 
 ## 📂 Project Structure
 
-
+```
 expensetracker/
 │
-├── expenses/ # Main app
-│ ├── templates/ # HTML templates
-│ │ ├── base.html
-│ │ ├── home.html
-│ │ ├── add_expense.html
-│ │ ├── update_expense.html
-│ │ ├── login.html
-│ │ └── signup.html
-│ ├── models.py
-│ ├── views.py
-│ ├── urls.py
-│ └── migrations/
+├── expenses/                  # Main app
+│   ├── templates/             # HTML templates
+│   │   ├── base.html
+│   │   ├── home.html
+│   │   ├── add_expense.html
+│   │   ├── update_expense.html
+│   │   ├── login.html
+│   │   └── signup.html
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── migrations/
 │
-├── expensetracker/ # Project settings
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
+├── expensetracker/            # Project settings
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 │
 ├── manage.py
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
+```
 
 ---
 
@@ -87,6 +87,8 @@ expensetracker/
 ---
 
 ## Security
+
+```yaml
   authentication:
     - Uses Django built-in User model
     - Passwords are securely hashed (PBKDF2)
@@ -109,10 +111,12 @@ expensetracker/
     - Database file excluded using .gitignore
     - Virtual environment not tracked
     - No credentials committed to GitHub
-
+```
 ---
 
 ## Future Scope
+
+```yaml
   analytics:
     - Monthly and yearly expense analysis
     - Category-wise spending insights
@@ -139,3 +143,4 @@ expensetracker/
   scalability:
     - Migration to PostgreSQL or MySQL
     - Cloud deployment support
+```
