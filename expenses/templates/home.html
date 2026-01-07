@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="fw-bold">Welcome to Expense Tracker</h1>
+    <p class="lead text-muted">Track your daily expenses easily and stay on budget.</p>
+
+    <a href="{% url 'add_expenses' %}" class="btn btn-primary btn-lg mt-3">Add New Expense</a>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+                <h5 class="card-title text-secondary">Today's Spending</h5>
+                <h2 class="fw-bold text-dark">₹{{ today_total }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+                <h5 class="card-title text-secondary">This Month</h5>
+                <h2 class="fw-bold text-dark">₹{{ month_total }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+                <h5 class="card-title text-secondary">Total Expenses</h5>
+                <h2 class="fw-bold text-dark">₹{{ all_total }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mt-4">Your Expenses</h3>
+
+<form method="GET" class="d-flex justify-content-end mb-3">
+    <select name="category" class="form-select w-auto me-2" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+        <option value="Food" {% if selected_category == "Food" %}selected{% endif %}>Food</option>
+        <option value="Transport" {% if selected_category == "Transport" %}selected{% endif %}>Transport</option>
+        <option value="Shopping" {% if selected_category == "Shopping" %}selected{% endif %}>Shopping</option>
+        <option value="Bills" {% if selected_category == "Bills" %}selected{% endif %}>Bills</option>
+        <option value="Entertainment" {% if selected_category == "Entertainment" %}selected{% endif %}>Entertainment</option>
+        <option value="Other" {% if selected_category == "Other" %}selected{% endif %}>Other</option>
+    </select>
+</form>
+
+<table class="table table-striped align-middle text-center">
+    <thead class="table-light">
+        <tr>
+            <th>Title</th>
+            <th>Amount (₹)</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.title }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.date }}</td>
+            <td class="text-nowrap">
+                <a href="{% url 'update_expenses' expense.id %}" class="btn btn-sm btn-warning me-1">Update</a>
+                <a href="{% url 'delete_expenses' expense.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No expenses added yet</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

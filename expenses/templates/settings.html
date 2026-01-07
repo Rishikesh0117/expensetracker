@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Settings - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="card shadow p-4" style="max-width: 450px; width: 100%;">
+        <h4 class="text-center mb-3">Account Settings</h4>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center py-2 small" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-2">
+                <label class="form-label mb-1 small text-secondary">Username</label>
+                <input type="text" name="username" value="{{ request.user.username }}" class="form-control form-control-sm" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-1 small text-secondary">Email</label>
+                <input type="email" name="email" value="{{ request.user.email }}" class="form-control form-control-sm">
+            </div>
+
+            <div class="border-top pt-2">
+                <h6 class="text-secondary mb-2 mt-2">Change Password</h6>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <input type="password" name="old_password" class="form-control form-control-sm" placeholder="Old password">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="password" name="new_password" class="form-control form-control-sm" placeholder="New password">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="password" name="confirm_password" class="form-control form-control-sm" placeholder="Confirm">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm w-100 mt-2">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Expense{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Update Expense</h2>
+    <form method="POST" class="mx-auto" style="max-width: 500px;">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="{{ expense.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount (₹)</label>
+            <input type="number" name="amount" class="form-control" step="0.01" value="{{ expense.amount }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select name="category" class="form-select" required>
+                <option value="Food" {% if expense.category == "Food" %}selected{% endif %}>Food</option>
+                <option value="Transport" {% if expense.category == "Transport" %}selected{% endif %}>Transport</option>
+                <option value="Shopping" {% if expense.category == "Shopping" %}selected{% endif %}>Shopping</option>
+                <option value="Bills" {% if expense.category == "Bills" %}selected{% endif %}>Bills</option>
+                <option value="Entertainment" {% if expense.category == "Entertainment" %}selected{% endif %}>Entertainment</option>
+                <option value="Other" {% if expense.category == "Other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" value="{{ expense.date|date:'Y-m-d' }}" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Update Expense</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
